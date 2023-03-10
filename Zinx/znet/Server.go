@@ -57,6 +57,8 @@ func (s *Server) Start() {
 						continue
 					}
 
+					fmt.Printf("Zinx Server Read: %s\n", buf[:read])
+
 					// 回显
 
 					if _, err := tcpConn.Write(buf[:read]); err != nil {
