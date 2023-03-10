@@ -1,1 +1,1 @@
-# Golan-Zinx 框架学习记录
+# Golang Zinx 框架学习记录
