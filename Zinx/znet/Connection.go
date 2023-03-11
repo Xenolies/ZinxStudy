@@ -16,22 +16,21 @@ type Connection struct {
 
 	// 当前连接的状态
 	isClosed bool
-
-	// 当前连接的绑定的处理业务的方法
-	handleAPI Ziface.HandleFunc
-
 	// 告知当前连接退出的Channel
 	ExitChan chan bool
+
+	// 当前连接的Router处理
+	Router Ziface.IRouter
 }
 
 // NewConnection 初始化连接模块的方法
-func NewConnection(conn *net.TCPConn, connID uint32, callbackAPI Ziface.HandleFunc) *Connection {
+func NewConnection(conn *net.TCPConn, connID uint32, router Ziface.IRouter) *Connection {
 	c := &Connection{
-		Conn:      conn,
-		ConnID:    connID,
-		handleAPI: callbackAPI,
-		isClosed:  false,
-		ExitChan:  make(chan bool, 1),
+		Conn:     conn,
+		ConnID:   connID,
+		isClosed: false,
+		ExitChan: make(chan bool, 1),
+		Router:   router,
 	}
 	return c
 }
@@ -46,17 +45,25 @@ func (c *Connection) StartReader() {
 		// 建立阻塞读取客户端数据到buf中
 		buf := make([]byte, 512)
 
-		read, err := c.Conn.Read(buf)
+		_, err := c.Conn.Read(buf)
 		if err != nil {
 			fmt.Printf("c.Conn.Read Error: %s\n", err)
 			continue
 		}
-
-		// 调用当前连接绑定的HandleAPI
-		if err := c.handleAPI(c.Conn, buf, read); err != nil {
-			fmt.Printf("c.ConnID: %d , Handle Error: %s\n", c.ConnID, err)
-			break
+		// 得到当前Conn数据的Request的请求数据
+		req := Request{
+			conn: c,
+			data: buf,
 		}
+
+		// 预注册路由方法
+		go func(request Ziface.IRequest) {
+			c.Router.PreHandle(request)
+			c.Router.Handle(request)
+			c.Router.PostHandle(request)
+		}(&req)
+
+		//在路由中找到注册绑定的Conn的Router调用
 
 	}
 
@@ -84,7 +91,7 @@ func (c *Connection) Stop() {
 	close(c.ExitChan)
 }
 
-// GetTCPConnection GetTCPConnetion 获取当前链接绑定的 Socket Conn
+// GetTCPConnection GetTCPConnection 获取当前链接绑定的 Socket Conn
 func (c *Connection) GetTCPConnection() *net.TCPConn {
 	return c.Conn
 }
@@ -101,6 +108,5 @@ func (c *Connection) RemoteAddr() net.Addr {
 
 // Send 发送数据 将数据发送给远程的客户端
 func (c *Connection) Send(data []byte) error {
-
 	return nil
 }
