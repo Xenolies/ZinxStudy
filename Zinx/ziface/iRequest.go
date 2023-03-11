@@ -1,4 +1,4 @@
-package Ziface
+package ziface
 
 // IRequest 接口 将客户端请求的练级信息和请求数据封装到一个Request中
 type IRequest interface {

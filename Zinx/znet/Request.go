@@ -1,17 +1,17 @@
 package znet
 
-import "ZinxDemo01/Zinx/Ziface"
+import "ZinxDemo01/Zinx/ziface"
 
 type Request struct {
 	// 已经和客户端建立好的链接
-	conn Ziface.IConnection
+	conn ziface.IConnection
 
 	//客户端请求的数据
 	data []byte
 }
 
 // GetConnection 获取客户端链接
-func (r *Request) GetConnection() Ziface.IConnection {
+func (r *Request) GetConnection() ziface.IConnection {
 	return r.conn
 }
 

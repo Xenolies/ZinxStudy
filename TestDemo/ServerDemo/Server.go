@@ -1,7 +1,7 @@
 package main
 
 import (
-	"ZinxDemo01/Zinx/Ziface"
+	"ZinxDemo01/Zinx/ziface"
 	"ZinxDemo01/Zinx/znet"
 	"fmt"
 )
@@ -26,7 +26,7 @@ type PingRouter struct {
 }
 
 // PreHandle 测试路由
-func (pr *PingRouter) PreHandle(request Ziface.IRequest) {
+func (pr *PingRouter) PreHandle(request ziface.IRequest) {
 	fmt.Println("Call Router PreHandle...")
 	_, err := request.GetConnection().GetTCPConnection().Write([]byte("Before Ping....  |  "))
 	if err != nil {
@@ -36,7 +36,7 @@ func (pr *PingRouter) PreHandle(request Ziface.IRequest) {
 }
 
 // Handle 测试路由
-func (pr *PingRouter) Handle(request Ziface.IRequest) {
+func (pr *PingRouter) Handle(request ziface.IRequest) {
 	fmt.Println("Call Router Handle...")
 	_, err := request.GetConnection().GetTCPConnection().Write([]byte("....Ping....Ping....Ping....  |  "))
 	if err != nil {
@@ -45,7 +45,7 @@ func (pr *PingRouter) Handle(request Ziface.IRequest) {
 }
 
 // PostHandle 测试路由
-func (pr *PingRouter) PostHandle(request Ziface.IRequest) {
+func (pr *PingRouter) PostHandle(request ziface.IRequest) {
 	fmt.Println("Call Router PostHandle...")
 	_, err := request.GetConnection().GetTCPConnection().Write([]byte("After Ping...."))
 	if err != nil {

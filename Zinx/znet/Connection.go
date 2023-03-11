@@ -1,7 +1,7 @@
 package znet
 
 import (
-	"ZinxDemo01/Zinx/Ziface"
+	"ZinxDemo01/Zinx/ziface"
 	"fmt"
 	"net"
 )
@@ -20,11 +20,11 @@ type Connection struct {
 	ExitChan chan bool
 
 	// 当前连接的Router处理
-	Router Ziface.IRouter
+	Router ziface.IRouter
 }
 
 // NewConnection 初始化连接模块的方法
-func NewConnection(conn *net.TCPConn, connID uint32, router Ziface.IRouter) *Connection {
+func NewConnection(conn *net.TCPConn, connID uint32, router ziface.IRouter) *Connection {
 	c := &Connection{
 		Conn:     conn,
 		ConnID:   connID,
@@ -57,7 +57,7 @@ func (c *Connection) StartReader() {
 		}
 
 		// 预注册路由方法
-		go func(request Ziface.IRequest) {
+		go func(request ziface.IRequest) {
 			c.Router.PreHandle(request)
 			c.Router.Handle(request)
 			c.Router.PostHandle(request)

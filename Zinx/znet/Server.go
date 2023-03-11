@@ -1,7 +1,7 @@
 package znet
 
 import (
-	"ZinxDemo01/Zinx/Ziface"
+	"ZinxDemo01/Zinx/ziface"
 	"fmt"
 	"net"
 )
@@ -17,7 +17,7 @@ type Server struct {
 	// 服务器监听端口
 	Port int
 	// 当前Sever添加一个Router,Server注册的链接处理业务
-	Router Ziface.IRouter
+	Router ziface.IRouter
 }
 
 func (s *Server) Start() {
@@ -75,7 +75,7 @@ func (s *Server) Serve() {
 }
 
 // NewServer 初始化 Server 模块
-func NewServer(name string) Ziface.IServer {
+func NewServer(name string) ziface.IServer {
 	s := &Server{
 		ServerName: name,
 		IpVersion:  "tcp4",
@@ -86,7 +86,7 @@ func NewServer(name string) Ziface.IServer {
 	return s
 }
 
-func (s *Server) AddRouter(router Ziface.IRouter) {
+func (s *Server) AddRouter(router ziface.IRouter) {
 	s.Router = router
 	fmt.Println("Router Add Success!!")
 }

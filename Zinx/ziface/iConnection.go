@@ -1,4 +1,4 @@
-package Ziface
+package ziface
 
 import "net"
 

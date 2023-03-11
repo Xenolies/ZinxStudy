@@ -1,4 +1,4 @@
-package Ziface
+package ziface
 
 // IRouter 路由抽象接口  路由里面数据都是IRequest
 type IRouter interface {
