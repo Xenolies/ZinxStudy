@@ -27,7 +27,6 @@ type GlobalObj struct {
 	Version        string // 当前 Zinx 版本号
 	MaxConn        int    // 最大链接数量
 	MaxPackageSize uint32 // 当前 Zinx 数据包最大值
-
 }
 
 var GlobalObject *GlobalObj
@@ -40,7 +39,7 @@ func init() {
 		TcpPort:        8899,
 		Name:           "Zinx Server",
 		Version:        "v0.4",
-		MaxConn:        10,
+		MaxConn:        2,
 		MaxPackageSize: 512,
 	}
 

@@ -1,6 +1,7 @@
 package znet
 
 import (
+	"ZinxDemo01/Zinx/utils"
 	"ZinxDemo01/Zinx/ziface"
 	"fmt"
 	"net"
@@ -21,6 +22,9 @@ type Server struct {
 }
 
 func (s *Server) Start() {
+
+	fmt.Printf("[START GlobalObject] Server Listener at IP: %s , Port %d is Starting\n", utils.GlobalObject.Host, utils.GlobalObject.TcpPort)
+
 	fmt.Printf("[START] Server Listener at IP: %s , Port %d is Starting\n", s.IP, s.Port)
 
 	go func() {
@@ -40,7 +44,9 @@ func (s *Server) Start() {
 		var conId uint32
 		conId = 0
 
-		fmt.Println("Start Zinx Server Success! ", s.ServerName, "is Listening")
+		fmt.Println("Start Zinx Server Success! [", utils.GlobalObject.Name, "] is Listening")
+
+		fmt.Println("Start Zinx Server Success! ", s.ServerName, " is Listening")
 
 		// 阻塞等待客户端链接和处理客户端链接业务(读写)
 		for {
@@ -77,10 +83,11 @@ func (s *Server) Serve() {
 // NewServer 初始化 Server 模块
 func NewServer(name string) ziface.IServer {
 	s := &Server{
-		ServerName: name,
+		// 使用 utils.GlobalObject 替换
+		ServerName: utils.GlobalObject.Name,
 		IpVersion:  "tcp4",
-		IP:         "0.0.0.0",
-		Port:       8899,
+		IP:         utils.GlobalObject.Host,
+		Port:       utils.GlobalObject.TcpPort,
 		Router:     nil,
 	}
 	return s

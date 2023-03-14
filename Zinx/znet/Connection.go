@@ -1,6 +1,7 @@
 package znet
 
 import (
+	"ZinxDemo01/Zinx/utils"
 	"ZinxDemo01/Zinx/ziface"
 	"fmt"
 	"net"
@@ -39,12 +40,12 @@ func NewConnection(conn *net.TCPConn, connID uint32, router ziface.IRouter) *Con
 func (c *Connection) StartReader() {
 	fmt.Println("Reader Goroutine is Running....")
 	defer fmt.Printf("ConnID: %d Reader is Exit, Remote Addr is : %s", c.ConnID, c.RemoteAddr().String())
+
 	defer c.Stop()
 
 	for {
 		// 建立阻塞读取客户端数据到buf中
-		buf := make([]byte, 512)
-
+		buf := make([]byte, utils.GlobalObject.MaxPackageSize)
 		_, err := c.Conn.Read(buf)
 		if err != nil {
 			fmt.Printf("c.Conn.Read Error: %s\n", err)
