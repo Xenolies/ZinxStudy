@@ -8,9 +8,7 @@ import (
 	"errors"
 )
 
-/*
-拆包和封包模块
-*/
+// DataPack 拆包和封包模块
 type DataPack struct {
 	Message ziface.IMessage
 }
