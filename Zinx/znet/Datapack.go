@@ -30,13 +30,17 @@ func (dp *DataPack) Pack(msg ziface.IMessage) ([]byte, error) {
 	dataBuff := bytes.NewBuffer([]byte{})
 
 	// 将dataLen写进dataBuff
-	// 高位对高地址
+	// 高端对高地址
 	err := binary.Write(dataBuff, binary.LittleEndian, msg.GetMsgLen())
 	if err != nil {
 		return nil, err
 	}
 	// 将MsgID写进dataBuff
-	err = binary.Write(dataBuff, binary.BigEndian, msg.GetMsgID())
+	err = binary.Write(dataBuff, binary.LittleEndian, msg.GetMsgID())
+	if err != nil {
+		return nil, err
+	}
+	err = binary.Write(dataBuff, binary.LittleEndian, msg.GetData())
 	if err != nil {
 		return nil, err
 	}

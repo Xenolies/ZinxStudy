@@ -63,7 +63,7 @@ func TestNewDataPack(t *testing.T) {
 						}
 
 						// 完成的消息读取完毕
-						fmt.Println("---> MsgID: ", msg.ID, ",DataLen: ", msg.DataLen, ",Data: ", msg.Data)
+						fmt.Println("---> MsgID: ", msg.ID, ",DataLen: ", msg.DataLen, ",Data: ", string(msg.Data))
 					}
 
 				}
@@ -93,7 +93,6 @@ func TestNewDataPack(t *testing.T) {
 		Data:    []byte("12345"),
 	}
 	sendData1, err := dp.Pack(msg1)
-	fmt.Println("sendData1: ", sendData1)
 	if err != nil {
 		fmt.Println(" dp.Pack msg1 Error: ", err)
 		return
@@ -106,7 +105,6 @@ func TestNewDataPack(t *testing.T) {
 		Data:    []byte("1234567"),
 	}
 	sendData2, err := dp.Pack(msg2)
-	fmt.Println("sendData2: ", sendData2)
 	if err != nil {
 		fmt.Println(" dp.Pack msg2 Error: ", err)
 		return
@@ -114,7 +112,6 @@ func TestNewDataPack(t *testing.T) {
 
 	// 将两个包站在一起
 	sendData1 = append(sendData1, sendData2...)
-	fmt.Println(sendData1)
 
 	// 一同发送至服务端
 	_, err = conn.Write(sendData1)
