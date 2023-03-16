@@ -24,7 +24,7 @@ func TestNewDataPack(t *testing.T) {
 		for {
 			conn, err := listener.Accept()
 			if err != nil {
-				fmt.Println(" listener.Accept() Error: ", err)
+				fmt.Println(" listener Accept Error: ", err)
 				return
 			}
 
@@ -40,7 +40,7 @@ func TestNewDataPack(t *testing.T) {
 					headData := make([]byte, dp.GetHeadLen())
 					_, err := io.ReadFull(conn, headData)
 					if err != nil {
-						fmt.Println("Server io.ReadFull Error: ", err)
+						fmt.Println("Server ReadFull Error: ", err)
 						// 一旦没有数据跳出
 						break
 					}
@@ -94,7 +94,7 @@ func TestNewDataPack(t *testing.T) {
 	}
 	sendData1, err := dp.Pack(msg1)
 	if err != nil {
-		fmt.Println(" dp.Pack msg1 Error: ", err)
+		fmt.Println("Pack msg1 Error: ", err)
 		return
 	}
 
@@ -106,7 +106,7 @@ func TestNewDataPack(t *testing.T) {
 	}
 	sendData2, err := dp.Pack(msg2)
 	if err != nil {
-		fmt.Println(" dp.Pack msg2 Error: ", err)
+		fmt.Println("Pack msg2 Error: ", err)
 		return
 	}
 
