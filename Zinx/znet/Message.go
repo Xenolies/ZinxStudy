@@ -10,6 +10,15 @@ type Message struct {
 	Data    []byte // 消息内容
 }
 
+// NewMessage 创建Message的方法
+func NewMessage(ID uint32, data []byte) *Message {
+	return &Message{
+		ID:      ID,
+		DataLen: uint32(len(data)),
+		Data:    data,
+	}
+}
+
 // GetMsgID 获取消息ID
 func (m *Message) GetMsgID() uint32 {
 	return m.ID

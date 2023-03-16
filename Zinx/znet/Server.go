@@ -25,8 +25,6 @@ func (s *Server) Start() {
 
 	fmt.Printf("[START GlobalObject] Server Listener at IP: %s , Port %d is Starting\n", utils.GlobalObject.Host, utils.GlobalObject.TcpPort)
 
-	fmt.Printf("[START] Server Listener at IP: %s , Port %d is Starting\n", s.IP, s.Port)
-
 	go func() {
 		// 获取一个TCP的addr
 		addr, err := net.ResolveTCPAddr(s.IpVersion, fmt.Sprintf("%s:%d", s.IP, s.Port))
@@ -45,8 +43,6 @@ func (s *Server) Start() {
 		conId = 0
 
 		fmt.Println("Start Zinx Server Success! [", utils.GlobalObject.Name, "] is Listening")
-
-		fmt.Println("Start Zinx Server Success! ", s.ServerName, " is Listening")
 
 		// 阻塞等待客户端链接和处理客户端链接业务(读写)
 		for {
