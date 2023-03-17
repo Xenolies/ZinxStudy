@@ -50,7 +50,7 @@ func (c *Connection) StartReader() {
 		//读取客户端的Msg head
 		headData := make([]byte, dp.GetHeadLen())
 		if _, err := io.ReadFull(c.GetTCPConnection(), headData); err != nil {
-			fmt.Println("Read Msg Head ErrorL ", err)
+			fmt.Println("Read Msg Head Error: ", err)
 			break
 		}
 

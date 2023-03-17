@@ -6,7 +6,6 @@ import (
 	"bytes"
 	"encoding/binary"
 	"errors"
-	"fmt"
 )
 
 // DataPack 拆包和封包模块
@@ -54,7 +53,7 @@ func (dp *DataPack) Pack(msg ziface.IMessage) ([]byte, error) {
 // 先把Head读出来,然后读取Head里面data长度
 func (dp *DataPack) Unpack(binaryData []byte) (ziface.IMessage, error) {
 	// 创建一个从输入二进制读数据的Buff
-	dataBuff := bytes.NewReader(binaryData)
+	dataBuff := bytes.NewBuffer(binaryData)
 	// 创建 Message对象 接受解析的数据
 	msg := &Message{}
 
@@ -64,8 +63,6 @@ func (dp *DataPack) Unpack(binaryData []byte) (ziface.IMessage, error) {
 	if err != nil {
 		return nil, err
 	}
-	u := msg.DataLen
-	fmt.Println(u)
 
 	// 读Message ID
 	err = binary.Read(dataBuff, binary.LittleEndian, &msg.ID)
@@ -75,9 +72,6 @@ func (dp *DataPack) Unpack(binaryData []byte) (ziface.IMessage, error) {
 
 	// 用户在设置中设置了最大包大小,需要判断是否超出最大长度
 	if utils.GlobalObject.MaxPackageSize > 0 && msg.DataLen > utils.GlobalObject.MaxPackageSize {
-		fmt.Println("MsgID: ", msg.ID)
-		fmt.Println("msg.DataLen: ", msg.DataLen)
-		fmt.Println("utils.GlobalObject.MaxPackageSize: ", utils.GlobalObject.MaxPackageSize)
 		return nil, errors.New("msgData is too Large")
 	}
 

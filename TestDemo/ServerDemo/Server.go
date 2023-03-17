@@ -29,7 +29,7 @@ type PingRouter struct {
 func (pr *PingRouter) PreHandle(request ziface.IRequest) {
 	fmt.Println("Call Router PreHandle...")
 	// 读取客户端数据,然后回写
-	_, err := request.GetConnection().GetTCPConnection().Write([]byte("....Before Ping |"))
+	err := request.GetConnection().SendMsg(1, []byte("....Before Ping "))
 	if err != nil {
 		fmt.Println("Router PreHandle Write Error: ", err)
 	}
@@ -52,7 +52,7 @@ func (pr *PingRouter) Handle(request ziface.IRequest) {
 // PostHandle 测试路由
 func (pr *PingRouter) PostHandle(request ziface.IRequest) {
 	fmt.Println("Call Router PostHandle...")
-	_, err := request.GetConnection().GetTCPConnection().Write([]byte("| After Ping...."))
+	err := request.GetConnection().SendMsg(3, []byte(" After Ping...."))
 	if err != nil {
 		fmt.Println("Router PostHandle Write Error: ", err)
 	}

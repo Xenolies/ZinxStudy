@@ -25,7 +25,7 @@ func main() {
 		// 创建一个封包对象
 		dp := znet.NewDataPack()
 		// 封包要发送的信息
-		binaryMsg, err := dp.Pack(znet.NewMessage(1, []byte("Hello,Zinx")))
+		binaryMsg, err := dp.Pack(znet.NewMessage(0, []byte("Hello,Zinx")))
 		if err != nil {
 			fmt.Println("Msg Pack Error: ", err)
 			return
@@ -57,7 +57,7 @@ func main() {
 				fmt.Println("Message Data Read Error: ", err)
 				break
 			}
-			fmt.Println("---> [FROM SERVER]:  MsgID: ", msg.ID, ", DataLen: ", msg.DataLen, ",Data: ", msg.Data)
+			fmt.Println("---> [FROM SERVER]:  MsgID: ", msg.ID, ", DataLen: ", msg.DataLen, ",Data: ", string(msg.Data))
 		}
 
 		time.Sleep(2 * time.Second)
