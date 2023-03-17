@@ -4,17 +4,22 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="494901ad-5f54-40b0-b10e-d218bc47baa4" name="变更" comment="ZinxStudy v0.5 Client端实现(有BUG)">
+    <list default="true" id="494901ad-5f54-40b0-b10e-d218bc47baa4" name="变更" comment="ZinxStudy v0.5 Client端实现 fix bug">
+      <change afterPath="$PROJECT_DIR$/Zinx/ziface/iMsgHandler.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Zinx/znet/MsgHandler.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestDemo/ClientDemo/Client.go" beforeDir="false" afterPath="$PROJECT_DIR$/TestDemo/ClientDemo/Client.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestDemo/ServerDemo/Server.go" beforeDir="false" afterPath="$PROJECT_DIR$/TestDemo/ServerDemo/Server.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Zinx/znet/Connection.go" beforeDir="false" afterPath="$PROJECT_DIR$/Zinx/znet/Connection.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Zinx/znet/Datapack.go" beforeDir="false" afterPath="$PROJECT_DIR$/Zinx/znet/Datapack.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Go File" />
+      </list>
+    </option>
   </component>
   <component name="GOROOT" url="file://$PROJECT_DIR$/../Golang/1.19.4" />
   <component name="Git.Settings">
@@ -29,20 +34,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.format.on.save.advertiser.fired&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.watchers.conflict.with.on.save.actions.check.performed&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/ZinxStudy/TestDemo/ServerDemo&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultGoTemplateProperty": "Go File",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.go.format.on.save.advertiser.fired": "true",
+    "RunOnceActivity.go.formatter.settings.were.checked": "true",
+    "RunOnceActivity.go.migrated.go.modules.settings": "true",
+    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
+    "RunOnceActivity.go.watchers.conflict.with.on.save.actions.check.performed": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "go.import.settings.migrated": "true",
+    "last_opened_file_path": "D:/ZinxStudy/TestDemo/ServerDemo"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Go 构建.go build ZinxDemo01/TestDemo/ClientDemo">
     <configuration name="go build Server.go (1)" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="ZinxStudy" />
@@ -130,7 +136,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Fix a Unpack failed Bug from Datapack.go" />
     <MESSAGE value="ZinxStudy v0.5 Client端实现(有BUG)" />
-    <option name="LAST_COMMIT_MESSAGE" value="ZinxStudy v0.5 Client端实现(有BUG)" />
+    <MESSAGE value="ZinxStudy v0.5 Client端实现 fix bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="ZinxStudy v0.5 Client端实现 fix bug" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
