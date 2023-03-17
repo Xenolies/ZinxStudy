@@ -39,23 +39,22 @@ func NewConnection(conn *net.TCPConn, connID uint32, router ziface.IRouter) *Con
 
 // StartReader 连接读的业务
 func (c *Connection) StartReader() {
-	fmt.Println("Reader Goroutine is Running....")
-	defer fmt.Printf("ConnID: %d Reader is Exit, Remote Addr is : %s", c.ConnID, c.RemoteAddr().String())
-
+	fmt.Println("Reader Goroutine is  running")
+	defer fmt.Println(c.RemoteAddr().String(), " conn reader exit!")
 	defer c.Stop()
 
 	for {
-		// 创建一个拆包解包对象
+		// 创建拆包解包的对象
 		dp := NewDataPack()
 
-		// 读取客户端 Msg Head 8字节
+		//读取客户端的Msg head
 		headData := make([]byte, dp.GetHeadLen())
 		if _, err := io.ReadFull(c.GetTCPConnection(), headData); err != nil {
 			fmt.Println("Read Msg Head ErrorL ", err)
 			break
 		}
 
-		// 拆包得到 MsgID和msgDataLen 放到msg中
+		//拆包，得到msgid 和 datalen 放在msg中
 		msg, err := dp.Unpack(headData)
 		if err != nil {
 			fmt.Println("UnPack Message Error: ", err)
@@ -71,26 +70,21 @@ func (c *Connection) StartReader() {
 				break
 			}
 		}
-
 		msg.SetData(data)
 
 		// 得到当前Conn数据的Request的请求数据
 		req := Request{
 			conn: c,
-			msg:  msg,
+			msg:  msg, //将之前的buf 改成 msg
 		}
-
-		// 预注册路由方法
+		//从路由Routers 中找到注册绑定Conn的对应Handle
 		go func(request ziface.IRequest) {
+			//执行注册的路由方法
 			c.Router.PreHandle(request)
 			c.Router.Handle(request)
 			c.Router.PostHandle(request)
 		}(&req)
-
-		//在路由中找到注册绑定的Conn的Router调用
-
 	}
-
 }
 
 // Start 启动连接 让当前连接准备开始工作

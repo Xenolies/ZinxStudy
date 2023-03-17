@@ -12,6 +12,8 @@ type Message struct {
 
 // NewMessage 创建Message的方法
 func NewMessage(ID uint32, data []byte) *Message {
+	//fmt.Println("uint32(len(data)): ", uint32(len(data)))
+	//fmt.Println("len(data): ", len(data))
 	return &Message{
 		ID:      ID,
 		DataLen: uint32(len(data)),

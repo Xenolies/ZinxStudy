@@ -35,11 +35,11 @@ var GlobalObject *GlobalObj
 func init() {
 	GlobalObject = &GlobalObj{
 		TcpServer:      nil,
-		Host:           "0.0.0.0",
+		Host:           "127.0.0.1",
 		TcpPort:        8899,
 		Name:           "Zinx Server",
-		Version:        "v0.4",
-		MaxConn:        2,
+		Version:        "v0.5",
+		MaxConn:        6,
 		MaxPackageSize: 512,
 	}
 
@@ -55,6 +55,8 @@ func (g *GlobalObj) Reload() {
 	data, err := os.ReadFile("conf/zinx.json")
 	if err != nil {
 		panic(err)
+		//fmt.Println(err)
+		//return
 	}
 
 	// 将 JSON 文件解析到 GlobalObj

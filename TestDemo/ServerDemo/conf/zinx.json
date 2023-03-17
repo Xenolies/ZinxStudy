@@ -1,7 +1,7 @@
 {
-  "Name": "Zinx v0.4 Demo",
+  "Name": "Zinx v0.5 Demo",
   "Host": "127.0.0.1",
   "TcpPort": "8899",
-  "MaxConn": "3",
-  "MaxPackageSize": "512"
+  "MaxConn": "5",
+  "MaxPackageSize": "1024"
 }

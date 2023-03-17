@@ -87,10 +87,11 @@ func TestNewDataPack(t *testing.T) {
 		模拟粘包,封装两个Msg一起发送
 	*/
 	// 封装第一个包
+	data := []byte("Hello,Zinx")
 	msg1 := &Message{
 		ID:      1,
-		DataLen: 5,
-		Data:    []byte("12345"),
+		DataLen: uint32(len(data)),
+		Data:    data,
 	}
 	sendData1, err := dp.Pack(msg1)
 	if err != nil {
