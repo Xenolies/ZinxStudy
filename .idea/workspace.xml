@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="494901ad-5f54-40b0-b10e-d218bc47baa4" name="变更" comment="ZinxStudy v0.5 Client端实现 fix bug">
-      <change afterPath="$PROJECT_DIR$/Zinx/ziface/iMsgHandler.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Zinx/znet/MsgHandler.go" afterDir="false" />
+    <list default="true" id="494901ad-5f54-40b0-b10e-d218bc47baa4" name="变更" comment="ZinxStudy v0.6 多路由模式--消息管理模块定义和实现">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -34,22 +32,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultGoTemplateProperty": "Go File",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.go.format.on.save.advertiser.fired": "true",
-    "RunOnceActivity.go.formatter.settings.were.checked": "true",
-    "RunOnceActivity.go.migrated.go.modules.settings": "true",
-    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
-    "RunOnceActivity.go.watchers.conflict.with.on.save.actions.check.performed": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "go.import.settings.migrated": "true",
-    "last_opened_file_path": "D:/ZinxStudy/TestDemo/ServerDemo"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.format.on.save.advertiser.fired&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.watchers.conflict.with.on.save.actions.check.performed&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/ZinxStudy/TestDemo/ServerDemo&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Go 构建.go build ZinxDemo01/TestDemo/ClientDemo">
+    <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
+      <module name="ZinxStudy" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="FILE" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
     <configuration name="go build Server.go (1)" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="ZinxStudy" />
       <working_directory value="$PROJECT_DIR$" />
@@ -101,6 +107,15 @@
       <pattern value="^\QTestNewDataPack\E$" />
       <method v="2" />
     </configuration>
+    <configuration default="true" type="GoTestRunConfiguration" factoryName="Go Test">
+      <module name="ZinxStudy" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="DIRECTORY" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Go 构建.go build Server.go (1)" />
       <item itemvalue="Go 构建.go build Server.go" />
@@ -137,7 +152,8 @@
     <MESSAGE value="Fix a Unpack failed Bug from Datapack.go" />
     <MESSAGE value="ZinxStudy v0.5 Client端实现(有BUG)" />
     <MESSAGE value="ZinxStudy v0.5 Client端实现 fix bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="ZinxStudy v0.5 Client端实现 fix bug" />
+    <MESSAGE value="ZinxStudy v0.6 多路由模式--消息管理模块定义和实现" />
+    <option name="LAST_COMMIT_MESSAGE" value="ZinxStudy v0.6 多路由模式--消息管理模块定义和实现" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
