@@ -14,7 +14,10 @@ func main() {
 	s := znet.NewServer("[Zinx]")
 
 	// 当前 Zinx 框架添加 Router
-	s.AddRouter(1,&PingRouter{})
+	s.AddRouter(1, &PingRouter{})
+
+	// 添加Hello Router
+	s.AddRouter(2, &HelloRouter{})
 
 	s.Serve()
 
@@ -55,5 +58,21 @@ func (pr *PingRouter) PostHandle(request ziface.IRequest) {
 	err := request.GetConnection().SendMsg(3, []byte(" After Ping...."))
 	if err != nil {
 		fmt.Println("Router PostHandle Write Error: ", err)
+	}
+}
+
+// HelloRouter 自定义路由
+type HelloRouter struct {
+	znet.BaseRouter
+}
+
+// Handle 测试路由 返回 Hello
+func (hr *HelloRouter) Handle(request ziface.IRequest) {
+	fmt.Println("Call Router HelloHandle...")
+	sprintf := fmt.Sprintf("Hello, %s", request.GetConnection().GetTCPConnection().RemoteAddr().String())
+	fmt.Println("SprintF: ", sprintf)
+	err := request.GetConnection().SendMsg(4, []byte(sprintf))
+	if err != nil {
+		fmt.Println("Router HelloHandle Write Error: ", err)
 	}
 }

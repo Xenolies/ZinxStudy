@@ -23,7 +23,7 @@ type Server struct {
 
 func (s *Server) Start() {
 
-	fmt.Printf("[START GlobalObject] Server Listener at IP: %s , Port %d is Starting\n", utils.GlobalObject.Host, utils.GlobalObject.TcpPort)
+	fmt.Printf("[START] Server Listener at IP: %s , Port %d is Starting\n", utils.GlobalObject.Host, utils.GlobalObject.TcpPort)
 
 	go func() {
 		// 获取一个TCP的addr
@@ -89,8 +89,8 @@ func NewServer(name string) ziface.IServer {
 	return s
 }
 
-func (s *Server) AddRouter(msgID uint32,router ziface.IRouter) {
+func (s *Server) AddRouter(msgID uint32, router ziface.IRouter) {
 	// 将Router 添加到 MsgHandler 中
-	s.MsgHandler.AddRouter(msgID,router)
+	s.MsgHandler.AddRouter(msgID, router)
 	fmt.Println("Router Add Success!!")
 }

@@ -3,6 +3,7 @@ package utils
 import (
 	"ZinxDemo01/Zinx/ziface"
 	"encoding/json"
+	"fmt"
 	"os"
 )
 
@@ -38,25 +39,28 @@ func init() {
 		Host:           "127.0.0.1",
 		TcpPort:        8899,
 		Name:           "Zinx Server",
-		Version:        "v0.5",
+		Version:        "v0.6",
 		MaxConn:        6,
 		MaxPackageSize: 512,
 	}
 
 	// 从 conf/zinx.json 加载用户自定义参数
-	//GlobalObject.Reload()
-
-	//
+	GlobalObject.Reload()
 
 }
 
 // Reload 从 zinx.json中加载自定义参数
 func (g *GlobalObj) Reload() {
+	//file, _ := exec.LookPath(os.Args[0])
+	//path, _ := filepath.Abs(file)
+	//index := strings.LastIndex(path, string(os.PathSeparator))
+	//path = path[:index]
+	//fmt.Println(path + "/conf/zinx.json ")
 	data, err := os.ReadFile("conf/zinx.json")
 	if err != nil {
-		panic(err)
-		//fmt.Println(err)
-		//return
+		//panic(err)
+		fmt.Println(err)
+		return
 	}
 
 	// 将 JSON 文件解析到 GlobalObj

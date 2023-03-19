@@ -21,18 +21,18 @@ type Connection struct {
 	// 告知当前连接退出的Channel
 	ExitChan chan bool
 
-		// 消息处理 MgsID 和对应的处理业务的关系
-		MsgHandler ziface.IMsgHandler
+	// 消息处理 MgsID 和对应的处理业务的关系
+	MsgHandler ziface.IMsgHandler
 }
 
 // NewConnection 初始化连接模块的方法
 func NewConnection(conn *net.TCPConn, connID uint32, msgHandler ziface.IMsgHandler) *Connection {
 	c := &Connection{
-		Conn:     conn,
-		ConnID:   connID,
-		isClosed: false,
-		ExitChan: make(chan bool, 1),
-		MsgHandler:  msgHandler,
+		Conn:       conn,
+		ConnID:     connID,
+		isClosed:   false,
+		ExitChan:   make(chan bool, 1),
+		MsgHandler: msgHandler,
 	}
 	return c
 }
@@ -42,7 +42,6 @@ func (c *Connection) StartReader() {
 	fmt.Println("Reader Goroutine is  running")
 	defer fmt.Println(c.RemoteAddr().String(), " conn reader exit!")
 	defer c.Stop()
-
 	for {
 		// 创建拆包解包的对象
 		dp := NewDataPack()
