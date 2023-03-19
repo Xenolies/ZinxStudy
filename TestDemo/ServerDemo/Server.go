@@ -14,7 +14,7 @@ func main() {
 	s := znet.NewServer("[Zinx]")
 
 	// 当前 Zinx 框架添加 Router
-	s.AddRouter(&PingRouter{})
+	s.AddRouter(1,&PingRouter{})
 
 	s.Serve()
 
