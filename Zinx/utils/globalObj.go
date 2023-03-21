@@ -51,11 +51,6 @@ func init() {
 
 // Reload 从 zinx.json中加载自定义参数
 func (g *GlobalObj) Reload() {
-	//file, _ := exec.LookPath(os.Args[0])
-	//path, _ := filepath.Abs(file)
-	//index := strings.LastIndex(path, string(os.PathSeparator))
-	//path = path[:index]
-	//fmt.Println(path + "/conf/zinx.json ")
 	data, err := os.ReadFile("conf/zinx.json")
 	if err != nil {
 		//panic(err)
