@@ -1,6 +1,7 @@
 package znet
 
 import (
+	"ZinxStudy/Zinx/utils"
 	"ZinxStudy/Zinx/ziface"
 	"errors"
 	"fmt"
@@ -105,9 +106,16 @@ func (c *Connection) StartReader() {
 			msg:  msg, //将之前的buf 改成 msg
 		}
 
-		//从路由 Routers 中找到注册绑定Conn的对应Handle
-		// 根据绑定好的MsgID, 传入消息处理模块 找到对应的处理业务
-		go c.MsgHandler.DoMsgHandler(&req)
+		// 判断工作池是否存在,存在则将消息交给工作池处理
+		if utils.GlobalObject.WorkerPoolSize > 0 {
+			// 开启工作处将消息交给工作池处理
+			c.MsgHandler.SendMsgToTaskQueue(&req)
+		} else {
+			//从路由 Routers 中找到注册绑定Conn的对应Handle
+			// 根据绑定好的MsgID, 传入消息处理模块 找到对应的处理业务
+			go c.MsgHandler.DoMsgHandler(&req)
+
+		}
 
 	}
 }
