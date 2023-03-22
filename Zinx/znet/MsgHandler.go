@@ -18,7 +18,7 @@ type MsgHandle struct {
 	// 负责处理Worker取任务的消息队列
 	TaskQuerue []chan ziface.IRequest
 
-	// 业务工作数量 worker 数量
+	// 业务工作 worker 数量
 	WorkerPoolSize uint32
 }
 
@@ -26,8 +26,8 @@ type MsgHandle struct {
 func NewMsgHandle() *MsgHandle {
 	return &MsgHandle{
 		Apis:           make(map[uint32]ziface.IRouter),
-		WorkerPoolSize: utils.GlobalObject.WorkerPoolSize,                                 // 从全局配置中获取最大worker数量
-		TaskQuerue:     make([]chan ziface.IRequest, utils.GlobalObject.MaxWorkerTaskLen), // 最大消息队列数量
+		WorkerPoolSize: utils.GlobalObject.WorkerPoolSize,                               // 从全局配置中获取最大worker数量
+		TaskQuerue:     make([]chan ziface.IRequest, utils.GlobalObject.WorkerPoolSize), // 最大消息队列数量
 	}
 }
 
@@ -56,4 +56,34 @@ func (mh *MsgHandle) AddRouter(msgID uint32, router ziface.IRouter) {
 	// 添加Msg和API的绑定关系
 	mh.Apis[msgID] = router
 	fmt.Println("Add Api MsgID SUCCESS: ", msgID)
+}
+
+// 启动Worker工作池 (只发生一次)
+func (mh *MsgHandle) StartWorkPool() {
+	// 根据WorkerPoolSize来启动 Worker, 每个Worker使用一个go承载
+	for i := 0; i < int(mh.WorkerPoolSize); i++ {
+		// 启动一个worker
+		// 1 当前worker对应的channel消息队列开辟空间
+		mh.TaskQuerue[i] = make(chan ziface.IRequest, utils.GlobalObject.MaxWorkerTaskLen)
+		// 2 启动当前worker 阻塞等待Channel传输过来的消息
+		go mh.statOneWoker(i, mh.TaskQuerue[i])
+	}
+
+}
+
+// 启动Worker工作流程
+func (mh *MsgHandle) statOneWoker(workrID int, taskQueue chan ziface.IRequest) {
+	fmt.Println("Start WorkerID: ", workrID, "Start!!")
+
+	// 阻塞等待消息
+	for {
+		select {
+		// 如果队列中有消息, 执行当前Request的业务
+		case request := <-taskQueue:
+			mh.DoMsgHandler(request)
+
+		}
+
+	}
+
 }

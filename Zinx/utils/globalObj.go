@@ -29,7 +29,7 @@ type GlobalObj struct {
 	MaxConn          int    // 最大链接数量
 	MaxPackageSize   uint32 // 当前 Zinx 数据包最大值
 	WorkerPoolSize   uint32 // 业务工作数量 worker 数量
-	MaxWorkerTaskLen uint32 // 允许的最大worker数量
+	MaxWorkerTaskLen uint32 // worker消息队列的任务数量最大值
 
 }
 
