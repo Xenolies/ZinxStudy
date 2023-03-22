@@ -1,7 +1,7 @@
 package utils
 
 import (
-	"ZinxDemo01/Zinx/ziface"
+	"ZinxStudy/Zinx/ziface"
 	"encoding/json"
 	"fmt"
 	"os"

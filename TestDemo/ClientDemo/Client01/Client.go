@@ -1,7 +1,7 @@
 package main
 
 import (
-	"ZinxDemo01/Zinx/znet"
+	"ZinxStudy/Zinx/znet"
 	"fmt"
 	"io"
 	"net"

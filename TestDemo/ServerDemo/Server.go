@@ -1,8 +1,8 @@
 package main
 
 import (
-	"ZinxDemo01/Zinx/ziface"
-	"ZinxDemo01/Zinx/znet"
+	"ZinxStudy/Zinx/ziface"
+	"ZinxStudy/Zinx/znet"
 	"fmt"
 )
 

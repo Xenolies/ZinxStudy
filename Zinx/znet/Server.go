@@ -1,8 +1,8 @@
 package znet
 
 import (
-	"ZinxDemo01/Zinx/utils"
-	"ZinxDemo01/Zinx/ziface"
+	"ZinxStudy/Zinx/utils"
+	"ZinxStudy/Zinx/ziface"
 	"fmt"
 	"net"
 )

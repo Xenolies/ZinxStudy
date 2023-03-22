@@ -1,7 +1,7 @@
 package znet
 
 import (
-	"ZinxDemo01/Zinx/ziface"
+	"ZinxStudy/Zinx/ziface"
 	"errors"
 	"fmt"
 	"io"

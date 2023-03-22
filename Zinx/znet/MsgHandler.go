@@ -1,7 +1,7 @@
 package znet
 
 import (
-	"ZinxDemo01/Zinx/ziface"
+	"ZinxStudy/Zinx/ziface"
 	"fmt"
 	"strconv"
 )
@@ -15,9 +15,9 @@ type MsgHandle struct {
 	Apis map[uint32]ziface.IRouter
 
 	// 负责处理Worker取任务的消息队列
-
+	TaskQuerue []chan ziface.IRequest
 	// 业务工作数量 worker 数量
-
+	WorkerPoolSize uint32
 }
 
 // NewMsgHandle 创建消息处理对象
