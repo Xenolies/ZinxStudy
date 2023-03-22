@@ -1,3 +1,3 @@
-module ZinxDemo01
+module ZinxStudy
 
 go 1.19
