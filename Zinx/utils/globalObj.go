@@ -25,9 +25,12 @@ type GlobalObj struct {
 	/*
 		Zinx Info
 	*/
-	Version        string // 当前 Zinx 版本号
-	MaxConn        int    // 最大链接数量
-	MaxPackageSize uint32 // 当前 Zinx 数据包最大值
+	Version          string // 当前 Zinx 版本号
+	MaxConn          int    // 最大链接数量
+	MaxPackageSize   uint32 // 当前 Zinx 数据包最大值
+	WorkerPoolSize   uint32 // 业务工作数量 worker 数量
+	MaxWorkerTaskLen uint32 // 允许的最大worker数量
+
 }
 
 var GlobalObject *GlobalObj
@@ -35,13 +38,15 @@ var GlobalObject *GlobalObj
 // 提供一个 init 方法,提供一个初始的默认值
 func init() {
 	GlobalObject = &GlobalObj{
-		TcpServer:      nil,
-		Host:           "127.0.0.1",
-		TcpPort:        8899,
-		Name:           "Zinx Server",
-		Version:        "v0.6",
-		MaxConn:        6,
-		MaxPackageSize: 512,
+		TcpServer:        nil,
+		Host:             "127.0.0.1",
+		TcpPort:          8899,
+		Name:             "Zinx Server",
+		Version:          "v0.6",
+		MaxConn:          6,
+		MaxPackageSize:   512,
+		WorkerPoolSize:   20,
+		MaxWorkerTaskLen: 30,
 	}
 
 	// 从 conf/zinx.json 加载用户自定义参数

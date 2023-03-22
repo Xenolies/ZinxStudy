@@ -1,6 +1,7 @@
 package znet
 
 import (
+	"ZinxStudy/Zinx/utils"
 	"ZinxStudy/Zinx/ziface"
 	"fmt"
 	"strconv"
@@ -16,6 +17,7 @@ type MsgHandle struct {
 
 	// 负责处理Worker取任务的消息队列
 	TaskQuerue []chan ziface.IRequest
+
 	// 业务工作数量 worker 数量
 	WorkerPoolSize uint32
 }
@@ -23,7 +25,9 @@ type MsgHandle struct {
 // NewMsgHandle 创建消息处理对象
 func NewMsgHandle() *MsgHandle {
 	return &MsgHandle{
-		Apis: make(map[uint32]ziface.IRouter),
+		Apis:           make(map[uint32]ziface.IRouter),
+		WorkerPoolSize: utils.GlobalObject.WorkerPoolSize,                                 // 从全局配置中获取最大worker数量
+		TaskQuerue:     make([]chan ziface.IRequest, utils.GlobalObject.MaxWorkerTaskLen), // 最大消息队列数量
 	}
 }
 

@@ -3,5 +3,7 @@
   "Host": "127.0.0.1",
   "TcpPort": "8899",
   "MaxConn": "5",
-  "MaxPackageSize": "1024"
+  "MaxPackageSize": "1024",
+  "WorkerPoolSize":"10",
+  "MaxWorkerTastLen": "30"
 }
