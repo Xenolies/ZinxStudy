@@ -13,6 +13,11 @@ import (
 type MsgHandle struct {
 	// 存放每一个MsgID对应的处理方法
 	Apis map[uint32]ziface.IRouter
+
+	// 负责处理Worker取任务的消息队列
+
+	// 业务工作数量 worker 数量
+
 }
 
 // NewMsgHandle 创建消息处理对象
