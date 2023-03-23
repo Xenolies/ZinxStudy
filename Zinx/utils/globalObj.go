@@ -42,11 +42,11 @@ func init() {
 		Host:             "127.0.0.1",
 		TcpPort:          8899,
 		Name:             "Zinx Server",
-		Version:          "v0.6",
-		MaxConn:          6,
+		Version:          "v0.8",
+		MaxConn:          5,
 		MaxPackageSize:   512,
-		WorkerPoolSize:   20,
-		MaxWorkerTaskLen: 30,
+		WorkerPoolSize:   5,
+		MaxWorkerTaskLen: 10,
 	}
 
 	// 从 conf/zinx.json 加载用户自定义参数
