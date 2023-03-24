@@ -62,13 +62,15 @@ func (s *Server) Start() {
 			// 建立链接前判断是否超过最大链接个数
 			// 超过就关闭
 			if s.ConnManager.Len() > utils.GlobalObject.MaxConn {
+				fmt.Println("[MAX]Too Many Connection!!")
+				fmt.Println("Now Conn: ", s.ConnManager.Len(), " MaxConn Setting: ", utils.GlobalObject.MaxConn)
 				conn.Close()
 				continue
 			}
 
 			// 客户端链接后的读写操作
 			// 将处理新链接的任务方法和Conn绑定得到连接模块
-			dealConn := NewConnection(conn, conId, s.MsgHandler)
+			dealConn := NewConnection(s, conn, conId, s.MsgHandler)
 			conId++
 
 			//启动连接任务处理
@@ -104,6 +106,11 @@ func NewServer(name string) ziface.IServer {
 		ConnManager: NewConnManager(),
 	}
 	return s
+}
+
+// GetConnMgr 返回当前Server中的ConnManager
+func (s *Server) GetConnMgr() ziface.IConnectionManager {
+	return s.ConnManager
 }
 
 func (s *Server) AddRouter(msgID uint32, router ziface.IRouter) {
