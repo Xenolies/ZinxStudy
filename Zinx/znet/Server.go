@@ -19,6 +19,9 @@ type Server struct {
 	Port int
 	// 当前 Server 的消息处理模块, 用来绑定 MsgID 和对应的处理业务API
 	MsgHandler ziface.IMsgHandler
+
+	// 该Server的链接控制器
+	ConnManager ziface.IConnectionManager
 }
 
 func (s *Server) Start() {
@@ -51,16 +54,21 @@ func (s *Server) Start() {
 
 		// 阻塞等待客户端链接和处理客户端链接业务(读写)
 		for {
-			tcpConn, err := tcpListener.AcceptTCP()
+			conn, err := tcpListener.AcceptTCP()
 			if err != nil {
 				fmt.Println("tcpListener.AcceptTCP Error : ", err)
 				continue
 			}
+			// 建立链接前判断是否超过最大链接个数
+			// 超过就关闭
+			if s.ConnManager.Len() > utils.GlobalObject.MaxConn {
+				conn.Close()
+				continue
+			}
 
 			// 客户端链接后的读写操作
-
 			// 将处理新链接的任务方法和Conn绑定得到连接模块
-			dealConn := NewConnection(tcpConn, conId, s.MsgHandler)
+			dealConn := NewConnection(conn, conId, s.MsgHandler)
 			conId++
 
 			//启动连接任务处理
@@ -71,6 +79,9 @@ func (s *Server) Start() {
 
 func (s *Server) Stop() {
 	// 服务器终止
+	fmt.Println("[STOP] Zinx Server[", utils.GlobalObject.Name, "] is STOP!")
+	s.ConnManager.ClearConn()
+
 }
 
 func (s *Server) Serve() {
@@ -85,11 +96,12 @@ func (s *Server) Serve() {
 func NewServer(name string) ziface.IServer {
 	s := &Server{
 		// 使用 utils.GlobalObject 替换
-		ServerName: utils.GlobalObject.Name,
-		IpVersion:  "tcp4",
-		IP:         utils.GlobalObject.Host,
-		Port:       utils.GlobalObject.TcpPort,
-		MsgHandler: NewMsgHandle(),
+		ServerName:  utils.GlobalObject.Name,
+		IpVersion:   "tcp4",
+		IP:          utils.GlobalObject.Host,
+		Port:        utils.GlobalObject.TcpPort,
+		MsgHandler:  NewMsgHandle(),
+		ConnManager: NewConnManager(),
 	}
 	return s
 }
