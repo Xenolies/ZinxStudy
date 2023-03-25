@@ -137,6 +137,9 @@ func (c *Connection) Start() {
 
 	// 启动当前连接写数据的业务
 	go c.StartWriter()
+
+	// 创建链接之后的调用的Hook函数(开发者编写)
+	go c.TcpServer.CallOnConnStart(c)
 }
 
 // Stop 停止连接 结束当前连接的工作
@@ -150,6 +153,10 @@ func (c *Connection) Stop() {
 
 	c.isClosed = true
 
+	// 销毁Conn之前调用的Hook函数
+	c.TcpServer.CallOnConnStop(c)
+
+	// 关闭链接
 	c.Conn.Close()
 
 	// 告知Writer关闭

@@ -16,4 +16,16 @@ type IServer interface {
 
 	// GetConnMgr 获取当前Server的ConnManager
 	GetConnMgr() IConnectionManager
+
+	// SetOnConnStart 注册Server创建链接自动调用的 Hook函数
+	SetOnConnStart(func(conn IConnection))
+
+	// SetOnConnStop 注册Server销毁链接自动调用的 Hook函数
+	SetOnConnStop(func(conn IConnection))
+
+	// CallOnConnStart 调用Server创建链接自动调用的 Hook函数
+	CallOnConnStart(connection IConnection)
+
+	// CallOnConnStop 调用Server销毁链接自动调用的 Hook函数
+	CallOnConnStop(connection IConnection)
 }

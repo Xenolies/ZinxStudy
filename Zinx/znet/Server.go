@@ -22,6 +22,12 @@ type Server struct {
 
 	// 该Server的链接控制器
 	ConnManager ziface.IConnectionManager
+
+	// Server创建链接自动调用的 Hook函数
+	OnConnStart func(Conn ziface.IConnection)
+
+	//	Server销毁链接自动调用的 Hook函数
+	OnConnStop func(Conn ziface.IConnection)
 }
 
 func (s *Server) Start() {
@@ -114,8 +120,35 @@ func (s *Server) GetConnMgr() ziface.IConnectionManager {
 	return s.ConnManager
 }
 
+// AddRouter 想着MsgHandler添加路由
 func (s *Server) AddRouter(msgID uint32, router ziface.IRouter) {
 	// 将Router 添加到 MsgHandler 中
 	s.MsgHandler.AddRouter(msgID, router)
 	fmt.Println("Router Add Success!!")
+}
+
+// SetOnConnStart 注册Server创建链接自动调用的 Hook函数
+func (s *Server) SetOnConnStart(hookFunc func(conn ziface.IConnection)) {
+	s.OnConnStart = hookFunc
+}
+
+// SetOnConnStop 注册Server销毁链接自动调用的 Hook函数
+func (s *Server) SetOnConnStop(hookFunc func(conn ziface.IConnection)) {
+	s.OnConnStop = hookFunc
+}
+
+// CallOnConnStart 调用Server创建链接自动调用的 Hook函数
+func (s *Server) CallOnConnStart(conn ziface.IConnection) {
+	if s.OnConnStart != nil {
+		fmt.Println("-----> Call OnConnStart()... ")
+		s.OnConnStart(conn)
+	}
+}
+
+// CallOnConnStop 调用Server销毁链接自动调用的 Hook函数
+func (s *Server) CallOnConnStop(conn ziface.IConnection) {
+	if s.OnConnStop != nil {
+		fmt.Println("-----> Call OnConnStop()... ")
+		s.OnConnStop(conn)
+	}
 }
