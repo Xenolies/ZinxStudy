@@ -10,13 +10,31 @@ import (
 基于 Zinx开发的服务端应用
 */
 
+// DoConnectionBegin 创建链接之后的Hook函数
+func DoConnectionBegin(conn ziface.IConnection) {
+	fmt.Println("---> DoConnBegin Hook is Called...")
+	if err := conn.SendMsg(202, []byte("DoConnBegin Hook is CALLED!!")); err != nil {
+		fmt.Println(err)
+	}
+}
+
+// DoConnectionLost 创建链接之后的Hook函数
+func DoConnectionLost(conn ziface.IConnection) {
+	fmt.Println("---> DoConnStop Hook is Called...")
+	fmt.Println("connID: ", conn.GetConnID(), "is Lost....")
+
+}
+
 func main() {
 	s := znet.NewServer("[Zinx]")
 
+	// 设置用户创建链接后之调用的 Hook 函数
+	s.SetOnConnStart(DoConnectionBegin)
+	// 设置用户销毁链接前调用的 Hook 函数
+	s.SetOnConnStop(DoConnectionLost)
+
 	// 当前 Zinx 框架添加 Router
 	s.AddRouter(1, &PingRouter{})
-
-	// 添加Hello Router
 	s.AddRouter(2, &HelloRouter{})
 
 	s.Serve()
