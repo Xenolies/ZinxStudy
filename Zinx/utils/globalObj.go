@@ -3,7 +3,6 @@ package utils
 import (
 	"ZinxStudy/Zinx/ziface"
 	"encoding/json"
-	"fmt"
 	"os"
 )
 
@@ -58,9 +57,7 @@ func init() {
 func (g *GlobalObj) Reload() {
 	data, err := os.ReadFile("conf/zinx.json")
 	if err != nil {
-		//panic(err)
-		fmt.Println(err)
-		return
+		panic(err)
 	}
 
 	// 将 JSON 文件解析到 GlobalObj
