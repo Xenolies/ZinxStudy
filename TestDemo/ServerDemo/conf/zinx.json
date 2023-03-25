@@ -1,8 +1,8 @@
 {
-  "Name": "Zinx v0.8 Demo",
+  "Name": "Zinx v0.9 Demo",
   "Host": "127.0.0.1",
   "TcpPort": 8899,
-  "MaxConn": 5,
+  "MaxConn": 2,
   "MaxPackageSize": 1024,
   "WorkerPoolSize":   10,
   "MaxWorkerTaskLen": 20

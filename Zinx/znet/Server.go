@@ -59,6 +59,12 @@ func (s *Server) Start() {
 				fmt.Println("tcpListener.AcceptTCP Error : ", err)
 				continue
 			}
+
+			// 客户端链接后的读写操作
+			// 将处理新链接的任务方法和Conn绑定得到连接模块
+			dealConn := NewConnection(s, conn, conId, s.MsgHandler)
+			conId++
+
 			// 建立链接前判断是否超过最大链接个数
 			// 超过就关闭
 			if s.ConnManager.Len() > utils.GlobalObject.MaxConn {
@@ -67,11 +73,6 @@ func (s *Server) Start() {
 				conn.Close()
 				continue
 			}
-
-			// 客户端链接后的读写操作
-			// 将处理新链接的任务方法和Conn绑定得到连接模块
-			dealConn := NewConnection(s, conn, conId, s.MsgHandler)
-			conId++
 
 			//启动连接任务处理
 			go dealConn.Start()

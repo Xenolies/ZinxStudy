@@ -89,12 +89,12 @@ func (mh *MsgHandle) statOneWoker(workrID int, taskQueue chan ziface.IRequest) {
 }
 
 // 将消息交给 TaskWorker 交给 Worker 处理
-func (mh *MsgHandle) SendMsgToTaskQueue(request ziface.IRequest)  {
+func (mh *MsgHandle) SendMsgToTaskQueue(request ziface.IRequest) {
 	// 将消息平均分配给不通过的 Worker
 	// 根据客户端链接 ConnID 分配
 	workerID := request.GetConnection().GetConnID() % mh.WorkerPoolSize // 按照一定规则分配给队列
-	fmt.Println("ADD ConnId: ",request.GetConnection().GetConnID()," MsgID: ",request.GetMsgID(),"--> WorkerIDL ",workerID)
+	fmt.Println("ADD ConnId: ", request.GetConnection().GetConnID(), " MsgID: ", request.GetMsgID(), "--> WorkerID: ", workerID)
 
-	// 将消息发送给对应的 Worker 的 TaskQueue 
+	// 将消息发送给对应的 Worker 的 TaskQueue
 	mh.TaskQuerue[workerID] <- request
 }
