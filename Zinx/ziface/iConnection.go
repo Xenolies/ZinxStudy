@@ -21,6 +21,15 @@ type IConnection interface {
 
 	// SendMsg  发送数据 将数据发送给远程的客户端,同时进行封包
 	SendMsg(msgID uint32, data []byte) error
+
+	// SetProperty 设置链接属性
+	SetProperty(key string, value interface{})
+
+	// GetProperty 获取链接属性
+	GetProperty(key string) (interface{}, error)
+
+	// RemoveProperty 移除链接属性
+	RemoveProperty(key string)
 }
 
 // HandleFunc 定义一个处理业务的方法

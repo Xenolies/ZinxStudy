@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"io"
 	"net"
+	"sync"
 )
 
 // Connection 当前连接的模块
@@ -30,6 +31,12 @@ type Connection struct {
 
 	// 信息读写Channel 无缓冲
 	msgChan chan []byte
+
+	// 链接属性集合
+	property map[string]interface{}
+
+	// 保护链接属性修改
+	propertyLock sync.RWMutex
 }
 
 // NewConnection 初始化连接模块的方法
@@ -204,4 +211,33 @@ func (c *Connection) SendMsg(msgID uint32, data []byte) error {
 	c.msgChan <- binaryMsg
 
 	return nil
+}
+
+func (c *Connection) SetProperty(key string, value interface{}) {
+	c.propertyLock.Lock()
+	defer c.propertyLock.Unlock()
+
+	// 添加链接属性
+	c.property[key] = value
+}
+
+func (c *Connection) GetProperty(key string) (interface{}, error) {
+	c.propertyLock.RLock()
+	defer c.propertyLock.RUnlock()
+
+	// 从 property 中读取
+	if value, ok := c.property[key]; ok {
+		return value, nil
+	}
+
+	return nil, errors.New("No Property FOUND ")
+}
+
+func (c *Connection) RemoveProperty(key string) {
+	c.propertyLock.Lock()
+	defer c.propertyLock.Unlock()
+
+	// 从 property 中删除
+	delete(c.property, key)
+
 }
