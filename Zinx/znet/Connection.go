@@ -33,6 +33,7 @@ type Connection struct {
 	msgChan chan []byte
 
 	// 链接属性集合
+
 	property map[string]interface{}
 
 	// 保护链接属性修改

@@ -16,6 +16,12 @@ func DoConnectionBegin(conn ziface.IConnection) {
 	if err := conn.SendMsg(202, []byte("DoConnBegin Hook is CALLED!!")); err != nil {
 		fmt.Println(err)
 	}
+
+	// 给当前连接设置属性
+	fmt.Println("Set Conn Property...")
+	conn.SetProperty("Name", "Xenolies")
+	conn.SetProperty("Repository", "https://github.com/Xenolies/ZinxStudy")
+
 }
 
 // DoConnectionLost 创建链接之后的Hook函数
@@ -23,10 +29,19 @@ func DoConnectionLost(conn ziface.IConnection) {
 	fmt.Println("---> DoConnStop Hook is Called...")
 	fmt.Println("connID: ", conn.GetConnID(), "is Lost....")
 
+	// 获取链接属性
+	if name, err := conn.GetProperty("Name"); err == nil {
+		fmt.Println("Name: ", name)
+	}
+
+	if repository, err := conn.GetProperty("Repository"); err == nil {
+		fmt.Println("Repository: ", repository)
+	}
+
 }
 
 func main() {
-	s := znet.NewServer("[Zinx]")
+	s := znet.NewServer()
 
 	// 设置用户创建链接后之调用的 Hook 函数
 	s.SetOnConnStart(DoConnectionBegin)

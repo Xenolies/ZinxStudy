@@ -102,7 +102,7 @@ func (s *Server) Serve() {
 }
 
 // NewServer 初始化 Server 模块
-func NewServer(name string) ziface.IServer {
+func NewServer() ziface.IServer {
 	s := &Server{
 		// 使用 utils.GlobalObject 替换
 		ServerName:  utils.GlobalObject.Name,
