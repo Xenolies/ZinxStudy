@@ -55,7 +55,7 @@ func init() {
 
 // Reload 从 zinx.json中加载自定义参数
 func (g *GlobalObj) Reload() {
-	data, err := os.ReadFile("conf/zinx.json")
+	data, err := os.ReadFile("./conf/zinx.json")
 	if err != nil {
 		panic(err)
 	}
@@ -63,7 +63,7 @@ func (g *GlobalObj) Reload() {
 	// 将 JSON 文件解析到 GlobalObj
 	err = json.Unmarshal(data, &GlobalObject)
 	if err != nil {
-		return
+		panic(err)
 	}
 
 }
